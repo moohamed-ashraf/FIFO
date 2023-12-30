@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using final; // Add this line if menuForm is in the YourNamespace namespace
-//mohamed ashraf 211006164
+using System.Media;
+//mohamed ashraf 211006164q
 //jessica amged 211006719
 //amany sameh 211004113
 // project name FIFO
@@ -300,14 +301,18 @@ namespace final
                 if (!int.TryParse(Console.ReadLine(), out menu))
                 {
                     Console.WriteLine("Invalid input. Please enter a number.");
+                    SoundPlayer soundplayer = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\BQY5HXR-wrong.wav");
+                    soundplayer.PlaySync();  
                     continue;
                 }
-
+                SoundPlayer clicksound = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\mixkit-clear-mouse-clicks-2997.wav");
+                clicksound.Play();
                 Console.WriteLine("--------------------------------------------------------------------------------");
 
                 switch (menu)
                 {
                     case 1:
+                        
                         Console.WriteLine("Enter tasks.");
                         Console.WriteLine("------------");
 
@@ -327,6 +332,8 @@ namespace final
                             while (!int.TryParse(Console.ReadLine(), out priority) || priority < 1 || priority > 5)
                             {
                                 Console.WriteLine("Invalid priority. Please enter a number between 1 and 5.");
+                                SoundPlayer soundwrong = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\BQY5HXR-wrong.wav");
+                                soundwrong.PlaySync();
                             }
 
                             Console.Write("Deadline (YYYY-MM-DD HH:MM): ");
@@ -335,11 +342,15 @@ namespace final
                             while (!DateTime.TryParse(Console.ReadLine(), out deadline))
                             {
                                 Console.WriteLine("Invalid date format. Please enter in the format YYYY-MM-DD HH:MM.");
+                                SoundPlayer wrong = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\BQY5HXR-wrong.wav");
+                                wrong.PlaySync();
                             }
 
                             while (deadline < DateTime.Now)
                             {
                                 Console.WriteLine("Warning: The entered deadline is in the past.");
+                                SoundPlayer wrongsound = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\BQY5HXR-wrong.wav");
+                                wrongsound.PlaySync();
                                 Console.WriteLine("Please enter a valid date.");
 
                                 deadline = DateTime.Parse(Console.ReadLine());
@@ -351,10 +362,15 @@ namespace final
 
                             // Add the entered task to the scheduler
                             taskScheduler.AddTask(taskName, priority, deadline);
+                            Console.WriteLine("----------------------");
+                            Console.WriteLine("Task added successfuly");
+                            Console.WriteLine("----------------------");
+                            SoundPlayer successsound = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\JKZFTR9-success-chime.wav");
+                            successsound.Play();
                             Console.WriteLine("--------------------------------------------------------------------------------");
-                            Console.WriteLine("------------------------");
+                            Console.WriteLine("--------------------------");
                             Console.WriteLine("Enter 'finish' to execute.|");
-                            Console.WriteLine("------------------------");
+                            Console.WriteLine("--------------------------");
                             Console.WriteLine("-------------------------------");
                             Console.WriteLine("Enter 'x' to return to the menu.|");
                             Console.WriteLine("-------------------------------");
@@ -382,6 +398,8 @@ namespace final
 
                     default:
                         Console.WriteLine("Invalid choice. Please enter a number between 1 and 6.");
+                        SoundPlayer soundplayer = new SoundPlayer(soundLocation: @"C:\Users\Ashraf\Downloads\BQY5HXR-wrong.wav");
+                        soundplayer.PlaySync();
                         break;
                 }
             }
